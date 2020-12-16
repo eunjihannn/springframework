@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+	<context:annotation-config></context:annotation-config>
+	<!-- 자동주입이 필요하면 자동주입을 시키겠다. -->
+
+	<!-- 대소문자 주의해서 작성 -->
+	<bean id="memberDao" class="spring.dao.MemberDao">
+	</bean>
+
+	<bean id="memberRegSvc" class="spring.service.MemberRegisterService">
+	</bean>
+	
+	 <!-- Printer,Printer1 중에서  어떤 것을 사용할지 한정자를 지정해줘야지 사용 가능하다 -->
+	<bean id="printer" class="spring.printer.MemberPrinter">
+		<property name="num" value="1"></property>
+		<qualifier value="check02"></qualifier><!-- 한정자 -->
+	</bean>
+	
+	<bean id="printer1" class="spring.printer.MemberPrinter">
+		<property name="num" value="2"></property>
+		<qualifier value="check01"></qualifier><!-- 한정자 -->
+	</bean>
+	
+	<bean id="infoPrinter" class="spring.printer.MemberInfoPrinter">
+		<property name="printer" ref="printer1"></property>
+	</bean>
+	
+	
+
+</beans>
